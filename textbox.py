@@ -100,6 +100,7 @@ class TextBox:
 
         # Generate the central part of the textbox.
         centralArray = []
+        middleString = ""
         for i in range(rowMax):
             middleString = ""
             for j in range(len(texts)):
