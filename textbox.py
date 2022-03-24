@@ -29,6 +29,11 @@ class TextBox:
         self.text = [[]] * num
 
     def setTitle(self, title):
+        """
+        Sets the title of the textbox. Accepts a single string.
+
+        NOTE: title doesn't play nice when there's only one column and it's smaller than the title. gonna have to fix that.
+        """
         self.title = title
         if title != "":
             self.useTitle = True
