@@ -1,3 +1,14 @@
+CornerTL = "\u2554"
+CornerTR = "\u2557"
+CornerBL = "\u255a"
+CornerBR = "\u255d"
+EdgeH = "\u2550"
+EdgeV = "\u2551"
+SplitU = "\u2566"
+SplitR = "\u2563"
+SplitL = "\u2560"
+SplitD = "\u2569"
+
 # Generates a dynamically sized box to hold text.
 def simpleBox(text = []):
 
@@ -9,24 +20,17 @@ def simpleBox(text = []):
         if len(str(text[i])) > max:
             max = len(str(text[i]))
 
-    # Sets the characters for the box's corners (cornerChars) and walls (edgeCharV and edgeCharH, corresponding to vertical wall and horizontal wall respectively).
-    # cornerChars works as an array: top left [0], top right [1], bottom left [2], bottom right [3]
-    # Can take in any unicode character, but works best with the unicode character codes.
-    # \u2554 = ╔
-    cornerChars = ["\u2554", "\u2557", "\u255a", "\u255d"]
-    edgeCharV = "\u2551"
-    edgeCharH = "\u2550"
-
     # Prints the top row of the box.
-    print(cornerChars[0] + (edgeCharH * (max + 2)) + cornerChars[1] )
+    print(CornerTL + (EdgeH * (max + 2)) + CornerTR )
 
     # Loops through every string in the text list and prints it inside the box.
     for i in range(len(text)):
-        print(edgeCharV + " " + str(text[i]) + (" " * (max - len(str(text[i])) + 1)) + edgeCharV)
+        print(EdgeV + " " + str(text[i]) + (" " * (max - len(str(text[i])) + 1)) + EdgeV)
 
     # Prints the bottom row of the box.
-    print(cornerChars[2] + (edgeCharH * (max + 2)) + cornerChars[3] )
+    print(CornerBL + (EdgeH * (max + 2)) + CornerBR )
 
+# Generates a dynamically sized box to hold two columns of text.
 def twoColBox(textA = [], textB = []):
     textA = list(textA)
     textB = list(textB)
@@ -44,18 +48,8 @@ def twoColBox(textA = [], textB = []):
 
     rowMax = max([len(textA), len(textB)])
 
-    # Sets the characters for the box's corners (cornerChars) and walls (edgeCharV and edgeCharH, corresponding to vertical wall and horizontal wall respectively).
-    # cornerChars works as an array: top left [0], top right [1], bottom left [2], bottom right [3]
-    # splitChars works as an array: top split [0], bottom split [1],
-    # Can take in any unicode character, but works best with the unicode character codes.
-    # \u2554 = ╔
-    cornerChars = ["\u2554", "\u2557", "\u255a", "\u255d"]
-    splitChars = ["\u2566", "\u2569"]
-    edgeCharV = "\u2551"
-    edgeCharH = "\u2550"
-
     # Prints the top row of the box.
-    print(cornerChars[0] + (edgeCharH * (maxA + 2)) + splitChars[0] + (edgeCharH * (maxB + 2)) + cornerChars[1] )
+    print(CornerTL + (EdgeH * (maxA + 2)) + SplitU + (EdgeH * (maxB + 2)) + CornerTR )
 
     # Loops through every string in the text list and prints it inside the box.
     for i in range(rowMax):
@@ -69,32 +63,69 @@ def twoColBox(textA = [], textB = []):
         except:
             currentTextB = ""
 
-        print(
-            edgeCharV + 
-            " " + 
-            currentTextA + 
-            (
-                " " * (maxA - len(currentTextA) + 1)
-            ) + 
-            edgeCharV + 
-            " " + 
-            currentTextB + 
-            (
-                " " * (maxB - len(currentTextB) + 1)
-            ) + 
-            edgeCharV 
+        print(EdgeV + " " + currentTextA + (" " * (maxA - len(currentTextA) + 1)) + EdgeV + " " + currentTextB + (" " * (maxB - len(currentTextB) + 1)) + EdgeV 
         )
     
     # Prints the bottom row of the box.
-    print(cornerChars[2] + (edgeCharH * (maxA + 2)) + splitChars[1] + (edgeCharH * (maxB + 2)) + cornerChars[3] )
+    print(CornerBL + (EdgeH * (maxA + 2)) + SplitD + (EdgeH * (maxB + 2)) + CornerBR )
 
-twoColBox(
+def colBox(*inputs):
+    texts = []
+    maxes = []
+    currentTexts = []
+    inputs = list(inputs)
+    for i in range(len(inputs)):
+        texts.append(list(inputs[i]))
+    
+    for i in range(len(texts)):
+        maxes.append(0)
+        for j in range(len(texts[i])):
+            if len(str(texts[i][j])) > maxes[i]:
+                maxes[i] = len(str(texts[i][j]))
+
+    rowMax = len(max(texts))
+
+    t = CornerTL
+    for i in range(len(maxes)):
+        t += EdgeH * (maxes[i] + 2)
+        if i < len(maxes) - 1:
+            t += SplitU
+    t += CornerTR
+
+    mA = []
+    for i in range(rowMax):
+        m = ""
+        for j in range(len(texts)):
+            try:
+                currentTexts.append(str(texts[j][i]))
+            except:
+                currentTexts.append("")
+        m += EdgeV
+        for j in range(len(currentTexts)):
+            m += " " + currentTexts[j] + (" " * (maxes[j] - len(currentTexts[j]) + 1))
+            m += EdgeV
+        currentTexts = []
+        mA.append(m)
+    m += EdgeV
+
+    print("Conclude")
+
+colBox(
     [
-        "Name", 
-        "Age", 
-        "Sex"
+        "Hello", 
+        "There"
     ], 
     [
-        "Bash Edward Elliott", 
-        "17", 
-        "Male"])
+        "How",
+        "Are", 
+        "You"
+    ], 
+    [
+        "I", 
+        "Am", 
+        "Fine",
+        "How",
+        "Are",
+        "You?"
+    ]
+)
