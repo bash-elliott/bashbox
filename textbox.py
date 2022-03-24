@@ -9,115 +9,83 @@ SplitR = "\u2563"
 SplitL = "\u2560"
 SplitD = "\u2569"
 
-# Generates a dynamically sized box to hold text.
-def simpleBox(text = []):
+class TextBox:
+    """
+    Standard textbox.
+    """
+    def __init__(self):
+        self.columns = 1
+        self.text = [[]] * 1
 
-    # Initialize max variable
-    max = 0
+    def setColumns(self, num):
+        """
+        Sets the number of columns for the textbox.
 
-    # Length of longest string
-    for i in range(len(text)):
-        if len(str(text[i])) > max:
-            max = len(str(text[i]))
+        num: the number of columns. Defaults to 1.
+        """
+        self.columns = num
+        self.text = [[]] * num
 
-    # Prints the top row of the box.
-    print(CornerTL + (EdgeH * (max + 2)) + CornerTR )
+    def setText(self, col, *text):
+        """
+        Sets the text for a given column.
 
-    # Loops through every string in the text list and prints it inside the box.
-    for i in range(len(text)):
-        print(EdgeV + " " + str(text[i]) + (" " * (max - len(str(text[i])) + 1)) + EdgeV)
+        col: the column to set the text for.
+        text: the text to set. Can take multiple strings.
 
-    # Prints the bottom row of the box.
-    print(CornerBL + (EdgeH * (max + 2)) + CornerBR )
-
-# Generates a dynamically sized box to hold two columns of text.
-def twoColBox(textA = [], textB = []):
-    textA = list(textA)
-    textB = list(textB)
-
-    maxA = 0
-    maxB = 0
-
-    for i in range(len(textA)):
-        if len(str(textA[i])) > maxA:
-            maxA = len(str(textA[i]))
+        NOTE: use setColumns first to set the number of columns before setting text.
+        """
+        self.text[col] = list(text)
     
-    for i in range(len(textB)):
-        if len(str(textB[i])) > maxB:
-            maxB = len(str(textB[i]))
-
-    rowMax = max([len(textA), len(textB)])
-
-    # Prints the top row of the box.
-    print(CornerTL + (EdgeH * (maxA + 2)) + SplitU + (EdgeH * (maxB + 2)) + CornerTR )
-
-    # Loops through every string in the text list and prints it inside the box.
-    for i in range(rowMax):
-        try:
-            currentTextA = str(textA[i])
-        except:
-            currentTextA = ""
-
-        try:    
-            currentTextB = str(textB[i])
-        except:
-            currentTextB = ""
-
-        print(EdgeV + " " + currentTextA + (" " * (maxA - len(currentTextA) + 1)) + EdgeV + " " + currentTextB + (" " * (maxB - len(currentTextB) + 1)) + EdgeV 
-        )
-    
-    # Prints the bottom row of the box.
-    print(CornerBL + (EdgeH * (maxA + 2)) + SplitD + (EdgeH * (maxB + 2)) + CornerBR )
-
-def colBox(*inputs):
-    texts = []
-    maxes = []
-    currentTexts = []
-    inputs = list(inputs)
-    for i in range(len(inputs)):
-        texts.append(list(inputs[i]))
-    
-    for i in range(len(texts)):
-        maxes.append(0)
-        for j in range(len(texts[i])):
-            if len(str(texts[i][j])) > maxes[i]:
-                maxes[i] = len(str(texts[i][j]))
-
-    rowMax = len(max(texts))
-
-    t = CornerTL
-    for i in range(len(maxes)):
-        t += EdgeH * (maxes[i] + 2)
-        if i < len(maxes) - 1:
-            t += SplitU
-    t += CornerTR
-
-    mA = []
-    for i in range(rowMax):
-        m = ""
-        for j in range(len(texts)):
-            try:
-                currentTexts.append(str(texts[j][i]))
-            except:
-                currentTexts.append("")
-        m += EdgeV
-        for j in range(len(currentTexts)):
-            m += " " + currentTexts[j] + (" " * (maxes[j] - len(currentTexts[j]) + 1))
-            m += EdgeV
+    def draw(self):
+        """
+        Draws the textbox.
+        """
+        texts = list(self.text)
+        maxes = []
         currentTexts = []
-        mA.append(m)
-    m += EdgeV
+        # for i in range(len(inputs)):
+        #     texts.append(list(inputs[i]))
+        
+        for i in range(len(texts)):
+            maxes.append(0)
+            for j in range(len(texts[i])):
+                if len(str(texts[i][j])) > maxes[i]:
+                    maxes[i] = len(str(texts[i][j]))
 
-    b = CornerBL
-    for i in range(len(maxes)):
-        b += EdgeH * (maxes[i] + 2)
-        if i < len(maxes) - 1:
-            b += SplitD
-    b += CornerBR
+        rowMax = len(max(texts))
 
-    print(t)
-    for i in range(len(mA)):
-        print(mA[i])
-    print(b)
+        t = CornerTL
+        for i in range(len(maxes)):
+            t += EdgeH * (maxes[i] + 2)
+            if i < len(maxes) - 1:
+                t += SplitU
+        t += CornerTR
 
-colBox(["Person A", "Person B", "", "Person D"], ["20", "", "21", "22"], ["Female", "", "Male", ""], ["", "", "", "Yes"])
+        mA = []
+        for i in range(rowMax):
+            m = ""
+            for j in range(len(texts)):
+                try:
+                    currentTexts.append(str(texts[j][i]))
+                except:
+                    currentTexts.append("")
+            m += EdgeV
+            for j in range(len(currentTexts)):
+                m += " " + currentTexts[j] + (" " * (maxes[j] - len(currentTexts[j]) + 1))
+                m += EdgeV
+            currentTexts = []
+            mA.append(m)
+        m += EdgeV
+
+        b = CornerBL
+        for i in range(len(maxes)):
+            b += EdgeH * (maxes[i] + 2)
+            if i < len(maxes) - 1:
+                b += SplitD
+        b += CornerBR
+
+        print(t)
+        for i in range(len(mA)):
+            print(mA[i])
+        print(b)
