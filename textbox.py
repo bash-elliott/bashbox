@@ -108,24 +108,16 @@ def colBox(*inputs):
         mA.append(m)
     m += EdgeV
 
-    print("Conclude")
+    b = CornerBL
+    for i in range(len(maxes)):
+        b += EdgeH * (maxes[i] + 2)
+        if i < len(maxes) - 1:
+            b += SplitD
+    b += CornerBR
 
-colBox(
-    [
-        "Hello", 
-        "There"
-    ], 
-    [
-        "How",
-        "Are", 
-        "You"
-    ], 
-    [
-        "I", 
-        "Am", 
-        "Fine",
-        "How",
-        "Are",
-        "You?"
-    ]
-)
+    print(t)
+    for i in range(len(mA)):
+        print(mA[i])
+    print(b)
+
+colBox(["Person A", "Person B", "", "Person D"], ["20", "", "21", "22"], ["Female", "", "Male", ""], ["", "", "", "Yes"])
