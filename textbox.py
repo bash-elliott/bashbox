@@ -74,29 +74,17 @@ class TextBox:
             spaces = sum(maxes) + ((len(maxes) - 1) * 2) + (self.columns + 2) - len(self.title) - 2
             if spaces <= 0:
                 spaces = 1
-            titleLine = CornerTL
-            titleLine += EdgeH * (spaces + len(self.title) + 1) 
-            titleLine += CornerTR
-            titleArray.append(titleLine)
-            titleLine = EdgeV
-            titleLine += " " + self.title + " " * spaces
-            titleLine += EdgeV
-            titleArray.append(titleLine)
+            titleArray.append(CornerTL + (EdgeH * (spaces + len(self.title) + 1)) + CornerTR)
+            titleArray.append(EdgeV + " " + self.title + (" " * spaces) + EdgeV)
 
         # Generate the top part of the textbox.
-        if self.useTitle:
-            topleft = SplitL
-            topright = SplitR
-        else:
-            topleft = CornerTL
-            topright = CornerTR
-        topLine = topleft
+        topLine = SplitL if self.useTitle else CornerTL
         for i in range(len(maxes)):
             topLine += EdgeH * (maxes[i] + 2)
             # If this isn't the last column, add a split.
             if i < len(maxes) - 1:
                 topLine += SplitU
-        topLine += topright
+        topLine += SplitR if self.useTitle else CornerTR
 
         # Generate the central part of the textbox.
         centralArray = []
@@ -112,8 +100,7 @@ class TextBox:
             middleString += EdgeV
             # Draw the text in each column.
             for j in range(len(currentTexts)):
-                middleString += " " + currentTexts[j] + (" " * (maxes[j] - len(currentTexts[j]) + 1))
-                middleString += EdgeV
+                middleString += " " + currentTexts[j] + (" " * (maxes[j] - len(currentTexts[j]) + 1)) + EdgeV
             currentTexts = []
             # Add the current string to the final array.
             centralArray.append(middleString)
