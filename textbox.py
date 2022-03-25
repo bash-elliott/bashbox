@@ -84,7 +84,14 @@ class TextBox:
             # If this isn't the last column, add a split.
             if i < len(maxes) - 1:
                 topLine += SplitU
-        topLine += SplitR if self.useTitle else CornerTR
+        if ((spaces + len(self.title)) - (maxes[i] + 2)) > 0:
+            topLine += SplitU + (EdgeH * ((spaces + len(self.title)) - (maxes[i] + 2))) + CornerBR
+        elif ((spaces + len(self.title)) - (maxes[i] + 2)) == 0:
+            topLine += SplitU + CornerBR
+        elif self.useTitle:
+            topLine += SplitR
+        else:
+            topLine += CornerTR
 
         # Generate the central part of the textbox.
         centralArray = []

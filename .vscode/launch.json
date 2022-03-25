@@ -10,7 +10,7 @@
             "name": "test",
             "type": "python",
             "request": "launch",
-            "program": "tester.py",
+            "program": "${file}",
             "console": "integratedTerminal",
             "justMyCode": true
         }
