@@ -9,9 +9,9 @@ SplitR = "\u2563"
 SplitL = "\u2560"
 SplitD = "\u2569"
 
-class TextBox:
+class BashBox:
     """
-    Standard textbox.
+    A standard BashBox.
     """
     def __init__(self):
         self.columns = 1
@@ -21,7 +21,7 @@ class TextBox:
 
     def setColumns(self, num):
         """
-        Sets the number of columns for the textbox.
+        Sets the number of columns for the BashBox.
 
         num: the number of columns. Defaults to 1.
         """
@@ -30,7 +30,7 @@ class TextBox:
 
     def setTitle(self, title):
         """
-        Sets the title of the textbox. Accepts a single string.
+        Sets the title of the BashBox. Accepts a single string.
 
         NOTE: title doesn't play nice when there's only one column and it's smaller than the title. gonna have to fix that.
         """
@@ -53,7 +53,7 @@ class TextBox:
     
     def draw(self):
         """
-        Draws the textbox.
+        Draws the BashBox.
         """
         texts = list(self.text)
         maxes = []
@@ -77,7 +77,7 @@ class TextBox:
             titleArray.append(CornerTL + (EdgeH * (spaces + len(self.title) + 1)) + CornerTR)
             titleArray.append(EdgeV + " " + self.title + (" " * spaces) + EdgeV)
 
-        # Generate the top part of the textbox.
+        # Generate the top part of the BashBox.
         topLine = SplitL if self.useTitle else CornerTL
         for i in range(len(maxes)):
             topLine += EdgeH * (maxes[i] + 2)
@@ -93,7 +93,7 @@ class TextBox:
         else:
             topLine += CornerTR
 
-        # Generate the central part of the textbox.
+        # Generate the central part of the BashBox.
         centralArray = []
         middleString = ""
         for i in range(rowMax):
@@ -114,7 +114,7 @@ class TextBox:
         # Print the last split.
         middleString += EdgeV
 
-        # Generate the bottom part of the textbox.
+        # Generate the bottom part of the BashBox.
         bottomLine = CornerBL
         for i in range(len(maxes)):
             bottomLine += EdgeH * (maxes[i] + 2)
@@ -123,7 +123,7 @@ class TextBox:
                 bottomLine += SplitD
         bottomLine += CornerBR
 
-        # Print the textbox.
+        # Print the BashBox.
         if self.useTitle:
             for i in range(len(titleArray)):
                 print(titleArray[i])
