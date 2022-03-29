@@ -4,7 +4,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="bashbox-bash_elliott",
+    name="bashbox",
     version="0.0.1",
     author="Bash Elliott",
     author_email="spicethings9@gmail.com",
