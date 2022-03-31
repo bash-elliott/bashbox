@@ -87,12 +87,15 @@ class BashBox:
             # If this isn't the last column, add a split.
             if i < len(maxes) - 1:
                 topLine += SplitU
-        difference = titleLength - totalMaxes
-        if titleLength > totalMaxes:
-            topLine += SplitU + ( EdgeH * (difference - 1)) + CornerBR
-            pass
+        if self.useTitle:
+            difference = titleLength - totalMaxes
+            if titleLength > totalMaxes:
+                topLine += SplitU + ( EdgeH * (difference - 1)) + CornerBR
+                pass
+            else:
+                topLine += SplitR
         else:
-            topLine += SplitR
+            topLine+= CornerTR
 
         # Generate the central part of the BashBox.
         centralArray = []
