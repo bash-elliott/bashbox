@@ -1,2 +1,0 @@
-recursive-include src/bashbox/themes *.bsh
-include init.txt
