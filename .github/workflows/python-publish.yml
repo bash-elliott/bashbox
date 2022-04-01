@@ -34,3 +34,5 @@ jobs:
       with:
         user: __token__
         password: ${{ secrets.PYPI_API_TOKEN }}
+        package_data: {'': ["themes\\*"]},
+        include_package_data: True

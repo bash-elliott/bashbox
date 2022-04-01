@@ -1,7 +1,7 @@
 import os
 
 def loadThemes():
-        themesDir = os.path.dirname(__file__) + "\\themes\\"
+        themesDir = os.path.dirname(os.path.abspath(__file__)) + "\\..\\..\\themes\\"
         themesRaw = [themesDir + s for s in (os.listdir(themesDir))]
         themesNames = [s.rstrip('.bsh') for s in (os.listdir(themesDir))]
         themesNamesExt = [s for s in (os.listdir(themesDir))]
