@@ -1,1 +1,1 @@
-recursive-include src/bashbox/themes 
+recursive-include themes *.bsh
