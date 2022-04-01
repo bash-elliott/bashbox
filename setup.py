@@ -22,7 +22,7 @@ setuptools.setup(
     ],
     packages=['bashbox'],
     package_dir={"bashbox": "src/bashbox"},
-    package_data={'bashbox': ['bashbox_themes/*', 'bashbox_init.txt']},
+    package_data={'bashbox': ['themes/*']},
     python_requires=">=3.6",
 
     include_package_data=True
