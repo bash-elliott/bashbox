@@ -1,13 +1,19 @@
-CornerTL = "\u2554"
-CornerTR = "\u2557"
-CornerBL = "\u255a"
-CornerBR = "\u255d"
-EdgeH = "\u2550"
-EdgeV = "\u2551"
-SplitU = "\u2566"
-SplitR = "\u2563"
-SplitL = "\u2560"
-SplitD = "\u2569"
+# double theme
+# CornerTL = "\u2554"
+# CornerTR = "\u2557"
+# CornerBL = "\u255a"
+# CornerBR = "\u255d"
+# EdgeH = "\u2550"
+# EdgeV = "\u2551"
+# SplitU = "\u2566"
+# SplitR = "\u2563"
+# SplitL = "\u2560"
+# SplitD = "\u2569"
+
+# barebones
+CornerTL = CornerTR = CornerBL = CornerBR = SplitU = SplitR = SplitL = SplitD = "+"
+EdgeH = "-"
+EdgeV = "|"
 
 class BashBox:
     """
@@ -18,6 +24,7 @@ class BashBox:
         self.text = [[]] * 1
         self.title = ""
         self.useTitle = False
+        self.theme = "double"
 
     def setColumns(self, num):
         """
@@ -51,6 +58,13 @@ class BashBox:
         """
         self.text[col] = list(text)
     
+    def setTheme(self, theme):
+        """
+        Set the theme for the box.
+        """
+        pass
+        
+
     def draw(self):
         """
         Draws the BashBox.
@@ -67,7 +81,7 @@ class BashBox:
                     maxes[i] = len(str(texts[i][j]))
 
         # Gets the maximum number of lines to draw based off the longest array.
-        rowMax = len(max(texts))
+        rowMax = max([len(i) for i in texts])
 
         titleArray = []
         spaces = 0
@@ -77,6 +91,8 @@ class BashBox:
                 spaces = 1
             titleArray.append(CornerTL + (EdgeH * (spaces + len(self.title) + 1)) + CornerTR)
             titleArray.append(EdgeV + " " + self.title + (" " * spaces) + EdgeV)
+            titleLength = len(titleArray[1])
+        totalMaxes = sum(maxes) + (2 * self.columns) + self.columns + 1
 
         # Generate the top part of the BashBox.
         topLine = SplitL if self.useTitle else CornerTL
@@ -85,14 +101,15 @@ class BashBox:
             # If this isn't the last column, add a split.
             if i < len(maxes) - 1:
                 topLine += SplitU
-        if ((spaces + len(self.title)) - (maxes[i] + 2)) > 0:
-            topLine += SplitU + (EdgeH * ((spaces + len(self.title)) - (maxes[i] + 2))) + CornerBR
-        elif ((spaces + len(self.title)) - (maxes[i] + 2)) == 0:
-            topLine += SplitU + CornerBR
-        elif self.useTitle:
-            topLine += SplitR
+        if self.useTitle:
+            difference = titleLength - totalMaxes
+            if titleLength > totalMaxes:
+                topLine += SplitU + ( EdgeH * (difference - 1)) + CornerBR
+                pass
+            else:
+                topLine += SplitR
         else:
-            topLine += CornerTR
+            topLine+= CornerTR
 
         # Generate the central part of the BashBox.
         centralArray = []
