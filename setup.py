@@ -24,6 +24,6 @@ setuptools.setup(
     packages=setuptools.find_packages(where="src"),
     python_requires=">=3.6",
 
-    package_data={'': ["themes\\*.bsh"]},
+    package_data={'': ["src\\bashbox\\themes\\*.bsh"]},
     include_package_data=True
 )
