@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="bashbox",
-    version="4.20",
+    version="1.0.8",
     author="Bash Elliott",
     author_email="spicethings9@gmail.com",
     description="Bash's textbox package.",
