@@ -30,4 +30,4 @@ jobs:
         pip install build
         pip install wheel
     - name: Build package
-      run: python setup.py sdist bdist_wheel
+      run: python -m build
