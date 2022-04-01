@@ -1,27 +1,36 @@
-CornerTL = "\u2554"
-CornerTR = "\u2557"
-CornerBL = "\u255a"
-CornerBR = "\u255d"
-EdgeH = "\u2550"
-EdgeV = "\u2551"
-SplitU = "\u2566"
-SplitR = "\u2563"
-SplitL = "\u2560"
-SplitD = "\u2569"
+import os
 
-class BashBox:
+def loadThemes():
+        themesDir = os.path.dirname(__file__) + "\\themes\\"
+        themesRaw = [themesDir + s for s in (os.listdir(themesDir))]
+        themesNames = [s.rstrip('.bsh') for s in (os.listdir(themesDir))]
+        themesNamesExt = [s for s in (os.listdir(themesDir))]
+
+        themes = {}
+
+        for i in range(len(themesRaw)):
+            with open(themesRaw[i]) as f:
+                themes[themesNames[i]] = [bytes(s.rstrip("\n"), "utf-8").decode("unicode_escape") for s in f.readlines()]
+
+        return themes
+
+
+class bashbox:
     """
-    A standard BashBox.
+    A standard bashbox.
     """
     def __init__(self):
         self.columns = 1
         self.text = [[]] * 1
         self.title = ""
         self.useTitle = False
+        self.theme = "double"
+        self.validThemes = loadThemes()
+        pass
 
     def setColumns(self, num):
         """
-        Sets the number of columns for the BashBox.
+        Sets the number of columns for the bashbox.
 
         num: the number of columns. Defaults to 1.
         """
@@ -30,7 +39,7 @@ class BashBox:
 
     def setTitle(self, title):
         """
-        Sets the title of the BashBox. Accepts a single string.
+        Sets the title of the bashbox. Accepts a single string.
 
         NOTE: title doesn't play nice when there's only one column and it's smaller than the title. gonna have to fix that.
         """
@@ -51,10 +60,30 @@ class BashBox:
         """
         self.text[col] = list(text)
     
+    def setTheme(self, theme):
+        """
+        Set the theme for the box.
+        """
+        if theme in self.validThemes.keys():
+            self.theme = theme
+        else:
+            raise(Exception("Invalid theme."))
+
     def draw(self):
         """
-        Draws the BashBox.
+        Draws the bashbox.
         """
+        CornerTL = self.validThemes[self.theme][0]
+        CornerTR = self.validThemes[self.theme][1]
+        CornerBL = self.validThemes[self.theme][2]
+        CornerBR = self.validThemes[self.theme][3]
+        EdgeH = self.validThemes[self.theme][4]
+        EdgeV = self.validThemes[self.theme][5]
+        SplitU = self.validThemes[self.theme][6]
+        SplitR = self.validThemes[self.theme][7]
+        SplitL = self.validThemes[self.theme][8]
+        SplitD = self.validThemes[self.theme][9]
+
         texts = list(self.text)
         maxes = []
         currentTexts = []
@@ -80,7 +109,7 @@ class BashBox:
             titleLength = len(titleArray[1])
         totalMaxes = sum(maxes) + (2 * self.columns) + self.columns + 1
 
-        # Generate the top part of the BashBox.
+        # Generate the top part of the bashbox.
         topLine = SplitL if self.useTitle else CornerTL
         for i in range(len(maxes)):
             topLine += EdgeH * (maxes[i] + 2)
@@ -97,7 +126,7 @@ class BashBox:
         else:
             topLine+= CornerTR
 
-        # Generate the central part of the BashBox.
+        # Generate the central part of the bashbox.
         centralArray = []
         middleString = ""
         for i in range(rowMax):
@@ -118,7 +147,7 @@ class BashBox:
         # Print the last split.
         middleString += EdgeV
 
-        # Generate the bottom part of the BashBox.
+        # Generate the bottom part of the bashbox.
         bottomLine = CornerBL
         for i in range(len(maxes)):
             bottomLine += EdgeH * (maxes[i] + 2)
@@ -127,7 +156,7 @@ class BashBox:
                 bottomLine += SplitD
         bottomLine += CornerBR
 
-        # Print the BashBox.
+        # Print the bashbox.
         if self.useTitle:
             for i in range(len(titleArray)):
                 print(titleArray[i])
