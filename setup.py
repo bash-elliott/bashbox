@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="bashbox",
-    version="TEST.1",
+    version="t.1",
     author="Bash Elliott",
     author_email="spicethings9@gmail.com",
     description="Bash's textbox package.",
@@ -24,6 +24,5 @@ setuptools.setup(
     packages=setuptools.find_packages(where="src"),
     python_requires=">=3.6",
 
-    package_data={'bashbox': ['src/bashbox/themes/*.bsh', 'src/bashbox/init.txt']},
     include_package_data=True
 )
