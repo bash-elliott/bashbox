@@ -248,7 +248,7 @@ box.draw()
 - [x] add multiple lines in a column
 - [x] add title functionality
 - [x] finish this readme
-- [ ] add color functionality
+- [x] add color functionality
 
 # Support and Contributions
 If you have any suggestions for Bashbox or want to fork Bashbox to improve upon it or add any features, feel free to do so and even make a pull request! I appreciate each and every contribution made.

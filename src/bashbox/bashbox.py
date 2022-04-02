@@ -14,6 +14,16 @@ def loadThemes():
 
         return themes
 
+colors = {
+    "black": "\033[1;30;40m",
+    "red": "\033[1;31;40m",
+    "green": "\033[1;32;40m",
+    "yellow": "\033[1;33;40m",
+    "blue": "\033[1;34;40m",
+    "magenta": "\033[1;35;40m",
+    "cyan": "\033[1;36;40m",
+    "white": "\033[1;37;40m",
+}
 
 class bashbox:
     """
@@ -26,6 +36,10 @@ class bashbox:
         self.useTitle = False
         self.theme = "double"
         self.validThemes = loadThemes()
+        self.borderColor = colors["white"]
+        self.textColor = colors["white"]
+        self.titleColor = colors["white"]
+        self.validColors = colors.keys()
         pass
 
     def setColumns(self, num):
@@ -69,20 +83,41 @@ class bashbox:
         else:
             raise(Exception("Invalid theme."))
 
+    def setColor(self, target, color):
+        """
+        Set the color for the box.
+
+        target: target of color change. accepts "border", "text" or "title".
+        color: the color to set.
+        """
+        if target == "border":
+            self.borderColor = colors[color]
+            pass
+        elif target == "text":
+            self.textColor = colors[color]
+            pass
+        elif target == "title":
+            self.titleColor = colors[color]
+            pass
+        elif not color in colors.keys():
+            raise(Exception("Invalid color."))
+        else:
+            raise(Exception("Invalid color type."))
+
     def draw(self):
         """
         Draws the bashbox.
         """
-        CornerTL = self.validThemes[self.theme][0]
-        CornerTR = self.validThemes[self.theme][1]
-        CornerBL = self.validThemes[self.theme][2]
-        CornerBR = self.validThemes[self.theme][3]
-        EdgeH = self.validThemes[self.theme][4]
-        EdgeV = self.validThemes[self.theme][5]
-        SplitU = self.validThemes[self.theme][6]
-        SplitR = self.validThemes[self.theme][7]
-        SplitL = self.validThemes[self.theme][8]
-        SplitD = self.validThemes[self.theme][9]
+        CornerTL = self.borderColor + self.validThemes[self.theme][0]
+        CornerTR = self.borderColor + self.validThemes[self.theme][1]
+        CornerBL = self.borderColor + self.validThemes[self.theme][2]
+        CornerBR = self.borderColor + self.validThemes[self.theme][3]
+        EdgeH = self.borderColor + self.validThemes[self.theme][4]
+        EdgeV = self.borderColor + self.validThemes[self.theme][5]
+        SplitU = self.borderColor + self.validThemes[self.theme][6]
+        SplitR = self.borderColor + self.validThemes[self.theme][7]
+        SplitL = self.borderColor + self.validThemes[self.theme][8]
+        SplitD = self.borderColor + self.validThemes[self.theme][9]
 
         texts = list(self.text)
         maxes = []
@@ -105,8 +140,8 @@ class bashbox:
             if spaces <= 0:
                 spaces = 1
             titleArray.append(CornerTL + (EdgeH * (spaces + len(self.title) + 1)) + CornerTR)
-            titleArray.append(EdgeV + " " + self.title + (" " * spaces) + EdgeV)
-            titleLength = len(titleArray[1])
+            titleArray.append(EdgeV + " " + self.titleColor + self.title + (" " * spaces) + EdgeV)
+            titleLength = len(titleArray[1]) - (10 * 3)
         totalMaxes = sum(maxes) + (2 * self.columns) + self.columns + 1
 
         # Generate the top part of the bashbox.
@@ -123,8 +158,10 @@ class bashbox:
                 pass
             else:
                 topLine += SplitR
+                pass
         else:
             topLine+= CornerTR
+            pass
 
         # Generate the central part of the bashbox.
         centralArray = []
@@ -140,7 +177,7 @@ class bashbox:
             middleString += EdgeV
             # Draw the text in each column.
             for j in range(len(currentTexts)):
-                middleString += " " + currentTexts[j] + (" " * (maxes[j] - len(currentTexts[j]) + 1)) + EdgeV
+                middleString += " " + self.textColor + currentTexts[j] + (" " * (maxes[j] - len(currentTexts[j]) + 1)) + EdgeV
             currentTexts = []
             # Add the current string to the final array.
             centralArray.append(middleString)
@@ -163,4 +200,4 @@ class bashbox:
         print(topLine)
         for i in range(len(centralArray)):
             print(centralArray[i])
-        print(bottomLine)
+        print(bottomLine + "\033[0m")
