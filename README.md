@@ -20,6 +20,16 @@ However, Bashbox can also be used as a simple tool for generating a simple box w
   * [Using pip](#using-pip)
   * [Using setup.py](#using-setuppy)
 - [Usage](#usage)
+  * [Basic bashbox](#basic-bashbox)
+  * [Multiple columns](#multiple-columns)
+  * [Multiple lines](#multiple-lines)
+  * [Multiple columns AND multiple lines](#multiple-columns-and-multiple-lines)
+  * [Adding a title](#adding-a-title)
+  * [Theming a bashbox](#theming-a-bashbox)
+    + [Advanced Theming](#advanced-theming)
+  * [Everything all together](#everything-all-together)
+- [Advanced usage](#advanced-usage)
+- [Task List](#task-list)
 
 # Installation
 ## Using pip
@@ -28,9 +38,8 @@ Run `python -m pip install bashbox` in the context of your choice, and Bashbox w
 Download the latest release's source code and run `python setup.py install` in the root directory.
 
 # Usage
-<details><summary>Basic Bashbox</summary>
-	<br>
-	
+## Basic bashbox
+
 **Input**
 ```python
 from bashbox import bashbox
@@ -46,12 +55,9 @@ box.draw()
 ║ This is a bashbox! ║
 ╚════════════════════╝
 ```
-	
-</details>
 
-<details><summary>Multiple Columns</summary>
-	<br>
-	
+## Multiple columns
+
 **Input**
 ```python
 from bashbox import bashbox
@@ -69,11 +75,11 @@ box.draw()
 ║ Some Text! ║ Another column of text! ║
 ╚════════════╩═════════════════════════╝
 ```
-</details>
 
-<details><summary>Multiple lines</summary>
-	<br>
-	
+**Note**: `setColumns()` has to be called before any uses of `setText()`, as `setColumns()` clears any set text.
+
+## Multiple lines
+
 **Input**
 ```python
 from bashbox import bashbox
@@ -90,11 +96,31 @@ box.draw()
 ║ Here's another! Wow! ║
 ╚══════════════════════╝
 ```
-</details>
 
-<details><summary>Adding a title</summary>
-	<br>
-	
+## Multiple columns AND multiple lines
+
+**Input**
+```python
+from bashbox import bashbox
+
+box = bashbox()
+
+box.setColumns(2)
+box.setText(0, "Here's a column with one line.")
+box.setText(1, "Here's another column", "with two lines!")
+box.draw()
+```
+
+**Output**
+```
+╔════════════════════════════════╦═══════════════════════╗
+║ Here's a column with one line. ║ Here's another column ║
+║                                ║ with two lines!       ║
+╚════════════════════════════════╩═══════════════════════╝
+```
+
+## Adding a title
+
 **Input**
 ```python
 from bashbox import bashbox
@@ -113,11 +139,10 @@ box.draw()
 ║ There's a title up there! ║
 ╚═══════════════════════════╝
 ```
-</details>
 
-<details><summary>Theming a bashbox</summary>
-	<br>
-	
+
+## Theming a bashbox
+
 **Input**
 ```python
 from bashbox import bashbox
@@ -158,10 +183,40 @@ barebone.draw()
 | Themed bashbox! |
 +-----------------+
 ```
-</details>
 
-<details><summary>Everything all together</summary>
-	<br>
+### Advanced Theming
+
+Bashbox themes are stored as `.bsh` files in the themes folder of the package's root, and consist of a list of unicode character codes. The default bashbox theme, `double.bsh`, looks like this. <br> *(The corresponding characters are printed before each code, and do not appear in the file.)*
+
+```
+╔ \u2554
+╗ \u2557
+╚ \u255a
+╝ \u255d
+═ \u2550
+║ \u2551
+╦ \u2566
+╣ \u2563
+╠ \u2560
+╩ \u2569
+```
+
+You can create and add your own bashbox themes by making a `.bsh` file in the themes folder and following this guideline for your character codes.
+
+```
+Top Left Corner
+Top Right Corner
+Bottom Left Corner
+Bottom Right Corner
+Horizontal Line
+Vertical Line
+Horizontal Split Going Down
+Vertical Split Going Right
+Vertical Split Going Left
+Horizontal Split Going Up
+```
+
+## Everything all together
 
 **Input**
 ```python
@@ -187,11 +242,15 @@ box.draw()
 │ Terry  │ terrymaster@email.com   │ +1 (777) 888-9999 │
 ╰────────┴─────────────────────────┴───────────────────╯
 ```
-</details>
 
 # Task List
 - [x] add multi-column functionality
 - [x] add multiple lines in a column
 - [x] add title functionality
+- [x] finish this readme
 - [ ] add color functionality
-- [ ] finish this readme
+
+# Support and Contributions
+If you have any suggestions for Bashbox or want to fork Bashbox to improve upon it or add any features, feel free to do so and even make a pull request! I appreciate each and every contribution made.
+
+If you've found a bug, please make an issue so I can work towards fixing it. I am also reachable by email at spicethings9@gmail.com.
