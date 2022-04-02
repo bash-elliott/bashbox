@@ -188,3 +188,10 @@ box.draw()
 ╰────────┴─────────────────────────┴───────────────────╯
 ```
 </details>
+
+# Task List
+- [x] add multi-column functionality
+- [x] add multiple lines in a column
+- [x] add title functionality
+- [ ] add color functionality
+- [ ] finish this readme
