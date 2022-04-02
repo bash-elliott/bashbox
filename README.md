@@ -228,7 +228,7 @@ box.setTheme('curved')
 box.setTitle("Friends")
 box.setText(0, "Bob", "Regina", "Terry")
 box.setText(1, "bobtheman@email.com", "regina.disney@email.com", "terrymaster@email.com")
-box.setText(2, "+1 (111) 222-3333", "+1 (444) 555-666", "+1 (777) 888-9999")
+box.setText(2, "+1 (111) 222-3333", "+1 (444) 555-6666", "+1 (777) 888-9999")
 box.draw()
 ```
 
@@ -238,7 +238,7 @@ box.draw()
 │ Friends                                              │
 ├────────┬─────────────────────────┬───────────────────┤
 │ Bob    │ bobtheman@email.com     │ +1 (111) 222-3333 │
-│ Regina │ regina.disney@email.com │ +1 (444) 555-666  │
+│ Regina │ regina.disney@email.com │ +1 (444) 555-6666 │
 │ Terry  │ terrymaster@email.com   │ +1 (777) 888-9999 │
 ╰────────┴─────────────────────────┴───────────────────╯
 ```
