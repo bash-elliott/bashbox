@@ -244,11 +244,8 @@ box.draw()
 ```
 
 # Task List
-- [x] add multi-column functionality
-- [x] add multiple lines in a column
-- [x] add title functionality
-- [x] finish this readme
-- [x] add color functionality
+- [ ] [finish readme](https://github.com/bash-elliott/bashbox/issues/23)
+- [ ] [add column title](https://github.com/bash-elliott/bashbox/issues/24)
 
 # Support and Contributions
 If you have any suggestions for Bashbox or want to fork Bashbox to improve upon it or add any features, feel free to do so and even make a pull request! I appreciate each and every contribution made.
