@@ -2,10 +2,10 @@
 
 <div align="center">
 	<br>
-	<img src="https://img.shields.io/github/workflow/status/bash-elliott/bashbox/Upload%20Python%20Package?label=Package%20Status&style=for-the-badge&logo=python&logoColor=white">
-	<img src="https://img.shields.io/github/v/tag/bash-elliott/bashbox?style=for-the-badge">
-	<img src="https://img.shields.io/github/release-date/bash-elliott/bashbox?style=for-the-badge">
-	<img src="https://img.shields.io/github/commit-activity/w/bash-elliott/bashbox?style=for-the-badge">
+	<img src="https://img.shields.io/github/workflow/status/raccter/bashbox/Upload%20Python%20Package?label=Package%20Status&style=for-the-badge&logo=python&logoColor=white">
+	<img src="https://img.shields.io/github/v/tag/raccter/bashbox?style=for-the-badge">
+	<img src="https://img.shields.io/github/release-date/raccter/bashbox?style=for-the-badge">
+	<img src="https://img.shields.io/github/commit-activity/w/raccter/bashbox?style=for-the-badge">
 	<br><br>
 </div>
 
@@ -244,8 +244,8 @@ box.draw()
 ```
 
 # Task List
-- [ ] [finish readme](https://github.com/bash-elliott/bashbox/issues/23)
-- [ ] [add column title](https://github.com/bash-elliott/bashbox/issues/24)
+- [ ] [finish readme](https://github.com/raccter/bashbox/issues/23)
+- [ ] [add column title](https://github.com/raccter/bashbox/issues/24)
 
 # Support and Contributions
 If you have any suggestions for Bashbox or want to fork Bashbox to improve upon it or add any features, feel free to do so and even make a pull request! I appreciate each and every contribution made.
