@@ -29,7 +29,6 @@ However, Bashbox can also be used as a simple tool for generating a simple box w
     + [Advanced Theming](#advanced-theming)
   * [Everything all together](#everything-all-together)
 - [Advanced usage](#advanced-usage)
-- [Task List](#task-list)
 
 # Installation
 ## Using pip
@@ -242,10 +241,6 @@ box.draw()
 │ Terry  │ terrymaster@email.com   │ +1 (777) 888-9999 │
 ╰────────┴─────────────────────────┴───────────────────╯
 ```
-
-# Task List
-- [ ] [finish readme](https://github.com/raccter/bashbox/issues/23)
-- [ ] [add column title](https://github.com/raccter/bashbox/issues/24)
 
 # Support and Contributions
 If you have any suggestions for Bashbox or want to fork Bashbox to improve upon it or add any features, feel free to do so and even make a pull request! I appreciate each and every contribution made.

@@ -21,7 +21,7 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     packages=['bashbox'],
-    package_dir={"bashbox": "src/bashbox"},
+    package_dir={"bashbox": "src"},
     package_data={'bashbox': ['themes/*']},
     python_requires=">=3.6",
 
