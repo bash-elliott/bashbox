@@ -1,4 +1,4 @@
-![bashbox](https://user-images.githubusercontent.com/42397332/162611285-7bf443e9-e4b1-4837-a16e-eae16d0796a8.png)
+![bashbox](https://user-images.githubusercontent.com/42397332/162611592-318869d6-db04-41e0-946b-4f2f0bc67e9a.png)
 
 <div align="center">
 	<br>
