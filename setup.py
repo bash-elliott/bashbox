@@ -8,12 +8,12 @@ setuptools.setup(
     version="1.1.5",
     author="Bash Elliott",
     author_email="spicethings9@gmail.com",
-    description="Bash's textbox package.",
+    description="Textbox package for Python",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/bash-elliott/bashbox",
+    url="https://github.com/raccter/bashbox",
     project_urls={
-        "Bug Tracker": "https://github.com/bash-elliott/bashbox/issues",
+        "Bug Tracker": "https://github.com/raccter/bashbox/issues",
     },
     classifiers=[
         "Programming Language :: Python :: 3",
