@@ -2,10 +2,10 @@
 
 <div align="center">
 	<br>
-	<img src="https://img.shields.io/github/workflow/status/raccter/bashbox/Upload%20Python%20Package?label=Package%20Status&style=for-the-badge&logo=python&logoColor=white">
-	<img src="https://img.shields.io/github/v/tag/raccter/bashbox?style=for-the-badge">
-	<img src="https://img.shields.io/github/release-date/raccter/bashbox?style=for-the-badge">
-	<img src="https://img.shields.io/github/commit-activity/w/raccter/bashbox?style=for-the-badge">
+	<img src="https://img.shields.io/github/workflow/status/rackodo/bashbox/Upload%20Python%20Package?label=Package%20Status&style=for-the-badge&logo=python&logoColor=white">
+	<img src="https://img.shields.io/github/v/tag/rackodo/bashbox?style=for-the-badge">
+	<img src="https://img.shields.io/github/release-date/rackodo/bashbox?style=for-the-badge">
+	<img src="https://img.shields.io/github/commit-activity/w/rackodo/bashbox?style=for-the-badge">
 	<br><br>
 </div>
 

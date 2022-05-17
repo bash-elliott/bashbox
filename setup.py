@@ -11,9 +11,9 @@ setuptools.setup(
     description="Textbox package for Python",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/raccter/bashbox",
+    url="https://github.com/rackodo/bashbox",
     project_urls={
-        "Bug Tracker": "https://github.com/raccter/bashbox/issues",
+        "Bug Tracker": "https://github.com/rackodo/bashbox/issues",
     },
     classifiers=[
         "Programming Language :: Python :: 3",
