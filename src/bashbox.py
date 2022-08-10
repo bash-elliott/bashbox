@@ -1,5 +1,6 @@
 import os
 
+# Load bashbox themes
 def loadThemes():
         themesDir = os.path.dirname(os.path.abspath(__file__)) + "\\themes\\"
         themesRaw = [themesDir + s for s in (os.listdir(themesDir))]
@@ -8,12 +9,14 @@ def loadThemes():
 
         themes = {}
 
+        # Loops for every file in the themes directory
         for i in range(len(themesRaw)):
             with open(themesRaw[i]) as f:
                 themes[themesNames[i]] = [bytes(s.rstrip("\n"), "utf-8").decode("unicode_escape") for s in f.readlines()]
 
         return themes
 
+# Color codes dictionary.
 colors = {
     "black": "\033[1;30;40m",
     "red": "\033[1;31;40m",
@@ -30,16 +33,22 @@ class bashbox:
     A standard bashbox.
     """
     def __init__(self):
+        # Variables relating to the contents of the bashbox.
         self.columns = 1
         self.text = [[]] * 1
-        self.title = ""
         self.useTitle = False
-        self.theme = "double"
-        self.validThemes = loadThemes()
+        self.title = ""
+
+        # Variables relating to the colours of the bashbox.
         self.borderColor = colors["white"]
         self.textColor = colors["white"]
         self.titleColor = colors["white"]
+        self.useColor = True
         self.validColors = colors.keys()
+        
+        # Variables relating to the theme  of the bashbox.
+        self.theme = "double"
+        self.validThemes = loadThemes()
         pass
 
     def setColumns(self, num):
@@ -104,10 +113,23 @@ class bashbox:
         else:
             raise(Exception("Invalid color type."))
 
+    def setUseColor(self, useColor):
+        """
+        Set whether or not to use color.
+        """
+        self.useColor = useColor
+        pass
+
     def draw(self):
         """
         Draws the bashbox.
         """
+        # Sets colours to nothing if useColor is false.
+        if self.useColor == False:
+            self.borderColor = ""
+            self.textColor = ""
+            self.titleColor = ""
+        
         CornerTL = self.borderColor + self.validThemes[self.theme][0]
         CornerTR = self.borderColor + self.validThemes[self.theme][1]
         CornerBL = self.borderColor + self.validThemes[self.theme][2]
@@ -118,7 +140,7 @@ class bashbox:
         SplitR = self.borderColor + self.validThemes[self.theme][7]
         SplitL = self.borderColor + self.validThemes[self.theme][8]
         SplitD = self.borderColor + self.validThemes[self.theme][9]
-
+    
         texts = list(self.text)
         maxes = []
         currentTexts = []
@@ -141,7 +163,7 @@ class bashbox:
                 spaces = 1
             titleArray.append(CornerTL + (EdgeH * (spaces + len(self.title) + 1)) + CornerTR)
             titleArray.append(EdgeV + " " + self.titleColor + self.title + (" " * spaces) + EdgeV)
-            titleLength = len(titleArray[1]) - (10 * 3)
+            titleLength = len(titleArray[1]) - (10 * 3) if self.useColor else len(titleArray[1])
         totalMaxes = sum(maxes) + (2 * self.columns) + self.columns + 1
 
         # Generate the top part of the bashbox.
@@ -200,4 +222,4 @@ class bashbox:
         print(topLine)
         for i in range(len(centralArray)):
             print(centralArray[i])
-        print(bottomLine + "\033[0m")
+        print((bottomLine + "\033[0m") if self.useColor else bottomLine)
