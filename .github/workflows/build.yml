@@ -1,7 +1,11 @@
 name: Build
 
 on:
-  workflow_call
+  workflow_call:
+    inputs:
+      config-path:
+        required: true
+        type: string
   push:
     branches:
       - dev
