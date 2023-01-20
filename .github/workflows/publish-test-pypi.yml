@@ -40,12 +40,16 @@ jobs:
       uses: actions/setup-python@v3
       with:
         python-version: '3.x'
+
     - name: Install Bashbox
       run: |
         python -m pip install --upgrade pip
         pip install --index-url https://test.pypi.org/simple/ bashbox
+
     - name: Test Bashbox
-      run: |
-        from bashbox import bashbox
-        box = bashbox("test")
-        box.draw()
+      uses: jannekem/run-python-script-action@v1
+      with: 
+        script: |
+          from bashbox import bashbox
+          box = bashbox("test")
+          box.draw()
