@@ -32,6 +32,7 @@ jobs:
 
   test:
     name: Test Package
+    needs: deploy
 
     runs-on: ubuntu-latest
 
